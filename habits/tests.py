@@ -42,9 +42,11 @@ class HabitTestCase(APITestCase):
         )
         self.assertEqual(
             response.json(),
-            {'id': 2, 'place': 'место', 'time_start': '08:00:00', 'action': 'почитстить зубы коту',
-             'is_pleasant': False, 'periodicity': '1', 'reward': 'скушать яблоко', 'time_complete': 120,
-             'is_published': False, 'owner': self.user.id, 'related_habit': None}
+            {'id': 2, 'place': 'место', 'time_start': '08:00:00',
+             'action': 'почитстить зубы коту', 'is_pleasant': False,
+             'periodicity': '1', 'reward': 'скушать яблоко',
+             'time_complete': 120, 'is_published': False,
+             'owner': self.user.id, 'related_habit': None}
         )
 
     def test_list_habit(self):
@@ -68,16 +70,20 @@ class HabitTestCase(APITestCase):
             'owner': self.user.id
         }
 
-        response = self.client.put(f'/habit/update/{self.habit.id}/', data=data)
+        response = self.client.put(f'/habit/update/{self.habit.id}/',
+                                   data=data)
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
         self.assertEqual(
             response.json(),
-            {'id': self.habit.id, 'place': 'test место', 'time_start': '10:00:00', 'action': 'почитстить зубы коту',
-             'is_pleasant': False, 'periodicity': '1', 'reward': 'скушать яблоко', 'time_complete': 120,
-             'is_published': False, 'owner': self.user.id, 'related_habit': None}
+            {'id': self.habit.id, 'place': 'test место',
+             'time_start': '10:00:00', 'action': 'почитстить зубы коту',
+             'is_pleasant': False, 'periodicity': '1',
+             'reward': 'скушать яблоко', 'time_complete': 120,
+             'is_published': False, 'owner': self.user.id,
+             'related_habit': None}
         )
 
     def test_partial_update_habit(self):
@@ -87,16 +93,20 @@ class HabitTestCase(APITestCase):
             'periodicity': 1
         }
 
-        response = self.client.patch(f'/habit/update/{self.habit.id}/', data=data)
+        response = self.client.patch(f'/habit/update/{self.habit.id}/',
+                                     data=data)
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK
         )
         self.assertEqual(
             response.json(),
-            {'id': self.habit.id, 'place': 'testovoe', 'time_start': '10:00:00', 'action': 'testov',
-             'is_pleasant': False, 'periodicity': '1', 'reward': 'test testes', 'time_complete': 120,
-             'is_published': False, 'owner': self.user.id, 'related_habit': None}
+            {'id': self.habit.id, 'place': 'testovoe',
+             'time_start': '10:00:00', 'action': 'testov',
+             'is_pleasant': False, 'periodicity': '1',
+             'reward': 'test testes', 'time_complete': 120,
+             'is_published': False, 'owner': self.user.id,
+             'related_habit': None}
         )
 
     def test_detail_habit(self):
@@ -107,9 +117,11 @@ class HabitTestCase(APITestCase):
         )
         self.assertEqual(
             response.json(),
-            {'id': self.habit.id, 'place': 'test', 'time_start': '10:00:00', 'action': 'testov',
-             'is_pleasant': False, 'periodicity': '1', 'reward': 'test testes', 'time_complete': 120,
-             'is_published': False, 'owner': self.user.id, 'related_habit': None}
+            {'id': self.habit.id, 'place': 'test', 'time_start': '10:00:00',
+             'action': 'testov', 'is_pleasant': False, 'periodicity': '1',
+             'reward': 'test testes', 'time_complete': 120,
+             'is_published': False, 'owner': self.user.id,
+             'related_habit': None}
         )
 
     def test_delete_habit(self):

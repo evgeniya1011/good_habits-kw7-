@@ -27,12 +27,12 @@ class HabitUpdate(generics.UpdateAPIView):
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
-    # def perform_update(self, serializer):
-    #     habit = serializer.save()
-    #     # task = PeriodicTask.objects.get(args__contains=[habit.id])
-    #     # if task:
-    #     #     task.delete()
-    #     create_periodic_task(habit)
+    def perform_update(self, serializer):
+        habit = serializer.save()
+        task = PeriodicTask.objects.get(args__contains=[habit.id])
+        if task:
+            task.delete()
+        create_periodic_task(habit)
 
 
 class HabitDelete(generics.DestroyAPIView):

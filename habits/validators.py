@@ -10,7 +10,9 @@ class RewardRelaterHabitValidator:
         reward_habit = dict(value).get(self.reward)
         related = dict(value).get(self.related_habit)
         if reward_habit and related:
-            raise serializers.ValidationError('Выберите только одно условие: или вознаграждение, или приятную привычку')
+            raise serializers.ValidationError('Выберите только одно условие:'
+                                              ' или вознаграждение, '
+                                              'или приятную привычку')
 
 
 class TimeCompleteValidator:
@@ -20,7 +22,8 @@ class TimeCompleteValidator:
     def __call__(self, value):
         time_comp = value.get(self.time_complete)
         if time_comp > 120:
-            raise serializers.ValidationError('Время выполнения не должно быть больше 120 секунд')
+            raise serializers.ValidationError(
+                'Время выполнения не должно быть больше 120 секунд')
 
 
 class IsPleaseValidator:
@@ -32,7 +35,8 @@ class IsPleaseValidator:
 
         if 'related_habit' in value:
             if not habit.is_pleasant:
-                raise serializers.ValidationError('Связанная привычка должна быть приятной')
+                raise serializers.ValidationError(
+                    'Связанная привычка должна быть приятной')
 
 
 class CheckValidator:
@@ -48,14 +52,5 @@ class CheckValidator:
         if nice:
             if reward_habit or related:
                 raise serializers.ValidationError(
-                    'У приятной привычки не может быть вознаграждения или связанной привычки')
-
-
-# class PeriodicityValidator:
-#     def __init__(self, periodicity):
-#         self.periodicity = periodicity
-#
-#     def __call__(self, value):
-#         period = value.get(self.periodicity)
-#         if period > '7':
-#             raise serializers.ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней')
+                    'У приятной привычки не может быть вознаграждения'
+                    ' или связанной привычки')
