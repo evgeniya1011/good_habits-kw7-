@@ -177,3 +177,7 @@ SIMPLE_JWT = {
 }
 
 CELERY_TIMEZONE = 'Europe/Moscow'
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+]
